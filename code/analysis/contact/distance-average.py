@@ -55,7 +55,7 @@ def plot_submatrix_heatmap(matrix, tag):
     print(f"Saved heatmap: {out_file}")
 
 # === Main program ===
-matrix_files = glob.glob("avg_matrix_last2000-*.txt")
+matrix_files = glob.glob("avg_matrix_last25000-*.txt")
 target_files = matrix_files  # Removed "protein" not in f filter, include all files
 
 for file in target_files:
