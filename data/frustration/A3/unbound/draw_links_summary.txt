@@ -1,0 +1,9 @@
+# Draw Links Summary
+# Group	Color	Count
+Group Color  Count
+  A-B green      5
+  A-B   red     18
+  A-C green      1
+  A-C   red      2
+  B-C green      5
+  B-C   red      3
