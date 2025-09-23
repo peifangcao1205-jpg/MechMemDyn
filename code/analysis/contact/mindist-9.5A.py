@@ -7,11 +7,11 @@ from MDAnalysis.lib.distances import distance_array
 # Parameters
 DISTANCE_CUTOFF = 9.5
 CONTACT_FILE = 'min_residue_distances.txt'          # Contact list
-AVG_MATRIX_FILE = 'avg_matrix_last2000.txt'         # Average matrix
-STD_MATRIX_FILE = 'std_matrix_last2000.txt'         # Standard deviation matrix
+AVG_MATRIX_FILE = 'avg_matrix_last25000.txt'         # Average matrix
+STD_MATRIX_FILE = 'std_matrix_last25000.txt'         # Standard deviation matrix
 
 # Load structure and trajectory
-u = mda.Universe('com_md.gro', 'com_md100ns_noPBC.xtc')
+u = mda.Universe('com_md.gro', 'com_md1000ns_noPBC.xtc')
 n_frames = len(u.trajectory)
 
 # Residue selection
@@ -28,7 +28,7 @@ print(f"Total frames: {n_frames}")
 min_distances = []
 distance_matrices = []
 
-for ts in u.trajectory[-2000:]:
+for ts in u.trajectory[-25000:]:
     print(f"Analyzing frame {ts.frame}")
     frame_matrix = np.full((n_residues, n_residues), np.inf)
 
