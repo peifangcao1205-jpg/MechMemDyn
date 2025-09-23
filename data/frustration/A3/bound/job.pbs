@@ -1,0 +1,33 @@
+#!/bin/bash
+#SBATCH --account=ctbp-common
+#SBATCH --partition=ctbp-common
+#SBATCH --job-name=rosetta
+##SBATCH --reservation=casp14
+##SBATCH --exclude=bc8u27n[1-2]
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=24:00:00
+#SBATCH --mem=4000m
+#SBATCH --export=ALL
+
+date
+eco My job ran on: $SLURM_NODELIST
+echo My jobid was $SLURM_JOBID
+echo My submission directory was $SLURM_SUBMIT_DIR
+
+/scratch/xc25/Software/rosetta_bin_linux_2018.33.60351_bundle/main/source/bin/rosetta_scripts.static.linuxgccrelease -parser:protocol  native.xml -s 3gso.pdb -overwrite -ignore_zero_occupancy false -pH -pH_mode true -pH:value_pH 7 > native.log
+cat native.log | grep "ResResE" > temp
+mv temp native.log
+
+let "j=0"
+while read line; do
+	let "j=j+1"
+	sed -i "s/GKRSNTTGK/$line/" test.xml
+	#/work/pw8/mc70/rosetta_bin_linux_2018.33.60351_bundle/main/source/bin/rosetta_scripts.static.linuxgccrelease -parser:protocol  test.xml -s 3gso.pdb
+	/scratch/xc25/Software/rosetta_bin_linux_2018.33.60351_bundle/main/source/bin/rosetta_scripts.static.linuxgccrelease -parser:protocol  test.xml -s 3gso.pdb -overwrite -ignore_zero_occupancy false -pH -pH_mode true -pH:value_pH 7 > $j.log
+	cat $j.log | grep "ResResE" > temp
+	mv temp  $j.log
+	mv 3gso_0001.pdb $j.pdb
+	sed -i "s/$line/GKRSNTTGK/" test.xml
+done < peptide
+ python /home/xc25/Rosetta/Frust_Post_v2_MultiChain_ManyBody_MultiLig_Gr_ContactList_7Dec.py 276 -2.5 0.5 300 9 0 Function1 -2.5 0.5
