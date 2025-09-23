@@ -65,12 +65,12 @@ def plot_std_heatmap_gradient(matrix, tag, out_dir):
     print(f"✅ Saved heatmap: {out_file}")
 
 # === Main program ===
-std_files = glob.glob("std_matrix_last2000-*.txt")
+std_files = glob.glob("std_matrix_last25000-*.txt")
 output_dir = 'std_singlecolor'
 os.makedirs(output_dir, exist_ok=True)
 
 for std_file in std_files:
-    tag = os.path.splitext(os.path.basename(std_file))[0].replace("std_matrix_last2000-", "")
+    tag = os.path.splitext(os.path.basename(std_file))[0].replace("std_matrix_last25000-", "")
     avg_file = std_file.replace("std_matrix", "avg_matrix")
 
     if not os.path.exists(avg_file):
