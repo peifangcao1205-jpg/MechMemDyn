@@ -59,7 +59,7 @@ matrix_files = glob.glob("avg_matrix_last2000-*.txt")
 target_files = matrix_files  # Removed "protein" not in f filter, include all files
 
 for file in target_files:
-    tag = os.path.splitext(os.path.basename(file))[0].replace("avg_matrix_last2000-", "")
+    tag = os.path.splitext(os.path.basename(file))[0].replace("avg_matrix_last25000-", "")
     try:
         matrix = np.loadtxt(file, delimiter='\t')
         if matrix.shape != (N_RESIDUES, N_RESIDUES):
