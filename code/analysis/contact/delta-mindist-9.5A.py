@@ -7,7 +7,7 @@ import os
 # === Parameters ===
 FILES = ['A1', 'AT1', 'AT2', 'AT3', 'AT4', 'AT5', 'B1', 'BT1', 'BT2', 'BT3', 
          'C1', 'CT1', 'CT2', 'CT3', 'D1', 'DT1', 'DT2', 'DT3']
-MATRIX_PROT = 'avg_matrix_last2000-protein.txt'
+MATRIX_PROT = 'avg_matrix_last25000-protein.txt'
 DISTANCE_CUTOFF = 9.5                # Distance cutoff (Å)
 DPI = 300                            # Image resolution
 OUTPUT_DIR = 'difference'            # Output directory
@@ -23,7 +23,7 @@ N_RESIDUES = TREM2_LEN + DAP12_LEN
 
 # === Process each file ===
 for tag in FILES:
-    matrix_file = f'avg_matrix_last2000-{tag}.txt'
+    matrix_file = f'avg_matrix_last25000-{tag}.txt'
     interface_file = os.path.join(OUTPUT_DIR, f'interface_pairs-{tag}.xlsx')
     enhanced_file = os.path.join(OUTPUT_DIR, f'enhanced_pairs-{tag}.xlsx')
     heatmap_file = os.path.join(OUTPUT_DIR, f'diff_distance_matrix-{tag}.tif')
